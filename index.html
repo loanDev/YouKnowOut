@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>YouKnowOut?</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/main.js"></script>
+<div class="game-container">
+
+    <div class="title-screen" style="display: none">
+        <div class="titleSettings" onclick="toggleSettings(); collect_sound();">
+            <img src="assets/img/icons/settigns.png" alt="Einstellungen">
+        </div>
+
+        <h1>YouKnowOut?</h1>
+
+        <div class="button-play" onclick="toggleLevel1(); collect_sound();">
+            Start
+        </div>
+
+        <input type="radio" name="diff" id="radioDiff1" value="1" onchange="if (this.checked) { difficulty_cheater(); }">
+        <label for="radioDiff1" id="labelDiff1" class="difficulty difficulty-cheater">Zu einfach</label>
+
+        <input type="radio" name="diff" id="radioDiff2" value="2" onchange="if (this.checked) { difficulty_easy(); }">
+        <label for="radioDiff2" id="labelDiff2" class="difficulty difficulty-easy">Einfach</label>
+
+        <input type="radio" name="diff" id="radioDiff3" value="3" onchange="if (this.checked) { difficulty_normal(); }">
+        <label for="radioDiff3" id="labelDiff3" class="difficulty difficulty-normal">Normal</label>
+
+        <input type="radio" name="diff" id="radioDiff4" value="4" onchange="if (this.checked) { difficulty_hard(); }">
+        <label for="radioDiff4" id="labelDiff4" class="difficulty difficulty-hard">Schwer</label>
+
+        <input type="radio" name="diff" id="radioDiff5" value="5" onchange="if (this.checked) { difficulty_hobbylos(); }">
+        <label for="radioDiff5" id="labelDiff5" class="difficulty difficulty-hobbylos">Hobbylos</label>
+    </div>
+
+    <div class="settingsPopup" style="display: none">
+        <br>
+        <img src="assets/img/icons/close.png" alt="close" onclick="exitSettings(); collect_sound();">
+        <h3>Einstellungen</h3>
+        <br>
+        <label for="musicVolume">Musik</label>
+        <input id="musicVolume" type="range" min="0" max="10" onchange="updateMusicVolume(this.value / 10); toggle_sound = true;">
+        <br>
+        <br>
+        <label for="effectVolume">Effekte</label>
+        <input id="effectVolume" type="range" min="0" max="10" onchange="updateEffectVolume(this.value / 10); crash_sound(); toggle_sound = true;">
+    </div>
+
+    <div class="level-1" style="display: none">
+
+        <div class="controls">
+            <img id="imgKeyW" src="assets/img/icons/key-w.png" alt="W">
+            <img id="imgKeyA" src="assets/img/icons/key-a.png" alt="A">
+            <img id="imgKeyS" src="assets/img/icons/key-s.png" alt="S">
+            <img id="imgKeyD" src="assets/img/icons/key-d.png" alt="D">
+            <p id="controlsMovement">Steuerung</p>
+            <img id="imgKeyT" src="assets/img/icons/key-t.png" alt="T">
+            <p id="controlsPause">Einstellungen</p>
+            <img id="imgKeyM" src="assets/img/icons/key-m.png" alt="M">
+            <p id="controlsMute">Stumm schalten</p>
+        </div>
+
+        <div class="boxes">
+            <div class="box box-1"></div>
+            <div class="box box-2"></div>
+            <div class="box box-3 "></div>
+        </div>
+
+        <div class="tables">
+            <div class="table table-1"></div>
+            <div class="table table-2"></div>
+        </div>
+
+        <div class="chests">
+            <div class="chest chest-1"></div>
+            <div class="chest chest-2"></div>
+        </div>
+
+        <div class="walls">
+            <div class="wall wall-1"></div>
+            <div class="wall wall-2"></div>
+            <div class="wall wall-3"></div>
+            <div class="wall wall-4"></div>
+            <div class="wall wall-5"></div>
+            <div class="wall wall-6"></div>
+            <div class="wall wall-7"></div>
+            <div class="wall wall-8"></div>
+        </div>
+
+        <div class="power_ups">
+            <div class="power_up boost show">
+                <img src="assets/img/textures/potion.png" alt="Potion">
+            </div>
+            <div class="power_up key show">
+                <img src="assets/img/textures/key.png" alt="Key">
+            </div>
+        </div>
+
+        <div class="level-2" style="display: none">
+        </div>
+
+        <div class="basics" style="display: none">
+
+            <div class="player-container">
+                <div class="player look-right stand" id="player">
+                    <img src="assets/img/figure/player.png" class="standing-player" alt="Player">
+                    <video width="32" height="32" class="running-player" autoplay loop muted>
+                        <source src="assets/video/playerAnimation.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <div class="hud" style="display: none;">
+                <p id="hud_left"> left: </p>
+                <p id="hud_top"> top: </p>
+                <p id="hud_speed"> speed: </p>
+                <p id="hud_key"> key: </p>
+                <p id="hud_sound"> sound: </p>
+            </div>
+
+            <div class="barriers">
+                <div class="barrier barrier-south"></div>
+                <div class="barrier barrier-west"></div>
+                <div class="barrier barrier-east"></div>
+                <div class="barrier barrier-north"></div>
+            </div>
+
+            <div class="doors">
+                <div class="door door-exit"></div>
+                <div class="door door-entrance"></div>
+            </div>
+        </div>
+    </div>
+    <footer class="fixed_footer">
+        <p>&#169 2022 Loan | v0.5-beta.m1 (25.04.2023)</p>
+    </footer>
+</div>
+</body>
+</html>

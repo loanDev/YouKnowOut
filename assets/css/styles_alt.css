@@ -1,0 +1,396 @@
+/* press-start-2p-regular - latin */
+@font-face {
+    font-family: 'Press Start 2P';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/press-start/press-start-2p-v12-latin-regular.eot');
+    src: local(''),
+    url('../fonts/press-start/press-start-2p-v12-latin-regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/press-start/press-start-2p-v12-latin-regular.woff2') format('woff2'),
+    url('../fonts/press-start/press-start-2p-v12-latin-regular.woff') format('woff'),
+    url('../fonts/press-start/press-start-2p-v12-latin-regular.ttf') format('truetype'),
+    url('../fonts/press-start/press-start-2p-v12-latin-regular.svg#PressStart2P') format('svg');
+}
+
+html,body {
+    font-family: "Press Start 2P", 'Courier New';
+    background: rgb(2,0,36);
+    background: linear-gradient(155deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+}
+
+.game-start{
+    width: 1024px;
+    height: 768px;
+    background-image: url("assets/img/startscreen2.png");
+    margin: 60px auto;
+    position: relative;
+}
+
+.game-start button {
+    position: absolute;
+    bottom: 100px;
+    right: 223px;
+    border: none;
+    background-color: #A01C6D;
+    color: #24063d;
+    font-size: 42px;
+    font-family: "Press Start 2P", 'Courier New';
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.game-start button:hover {
+    background-color: #050F1B;
+    color: #17515F;
+}
+
+.game-container {
+    width: 1024px;
+    height: 768px;
+    background-image: url("assets/img/textures/wood-dark.png");
+    margin: 60px auto;
+    overflow: hidden;
+    z-index: 0;
+    padding: 0;
+    display: block;
+}
+
+.game-container div {
+    /*display: block;*/
+    position: absolute;
+}
+
+.box {
+    background-image: url("assets/img/textures/box.png");
+}
+
+.box-1 {
+    width: 32px;
+    height: 32px;
+    top: 500px;
+    left: 543px;
+}
+
+.box-2 {
+    width: 32px;
+    height: 32px;
+    top: 110px;
+    left: 415px;
+}
+
+.box-3 {
+    width: 32px;
+    height: 32px;
+    top: 210px;
+    left: 28px;
+}
+
+.table {
+    background-image: url("assets/img/textures/wooden_with_candles.png");
+}
+
+.table-1 {
+    width: 72px;
+    height: 96px;
+    top: 330px;
+    left: 445px;
+}
+
+.table-2 {
+    width: 72px;
+    height: 96px;
+    top: 505px;
+    left: 924px;
+}
+
+.chest {
+    background-image: url("assets/img/textures/chest2.png");
+}
+
+.chest-1 {
+    width: 32px;
+    height: 32px;
+    top: 28px;
+    left: 965px;
+}
+
+.chest-2 {
+    width: 32px;
+    height: 32px;
+    top: 483px;
+    left: 27px;
+}
+
+.chest-open {
+    background-position-x: 32px;
+    background-position-y: 0px;
+}
+
+.door {
+    background-image: url("assets/img/textures/New Piskel (1) (1).png");
+}
+
+.door-exit {
+    width: 45px;
+    height: 60px;
+    top: 696px;
+    left: 979px;
+
+}
+
+.door.locked {
+    background-image: url("assets/img/textures/New Piskel (1) (2).png");
+}
+
+.door-entrance {
+    width: 45px;
+    height: 60px;
+    top: 14px;
+    left: -9px;
+}
+
+.wall {
+    background-image: url("images/textures/04pietrac4.png");
+}
+
+.wall-south {
+    width: 1024px;
+    height: 25px;
+    top: 743px;
+}
+
+.wall-east {
+    width: 25px;
+    height: 709px;
+    left: 999px;
+}
+
+.wall-west {
+    width: 25px;
+    height: 708px;
+    top: 60px;
+}
+
+.wall-north {
+    width: 1024px;
+    height: 25px;
+}
+
+.wall-1 {
+    width: 20px;
+    height: 200px;
+    left: 450px;
+}
+
+.wall-2 {
+    width: 300px;
+    height: 20px;
+    left: 700px;
+    top: 450px;
+}
+
+.wall-3 {
+    width: 150px;
+    height: 20px;
+    top: 135px;
+}
+
+.wall-4 {
+    width: 400px;
+    height: 20px;
+    top: 460px;
+}
+
+.wall-5 {
+    width: 20px;
+    height: 140px;
+    left: 300px;
+    top: 460px;
+}
+
+.wall-6 {
+    width: 20px;
+    height: 270px;
+    left: 700px;
+    top: 100px;
+}
+
+.wall-7 {
+    width: 20px;
+    height: 350px;
+    left: 520px;
+    top: 300px;
+}
+
+.wall-8 {
+    width: 200px;
+    height: 20px;
+    left: 150px;
+    top: 290px;
+}
+
+.player {
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+}
+
+.player img,
+.player video {
+    width: 32px;
+    height: 32px;
+}
+
+.player.stand .standing-player,
+.player.run .running-player {
+    display: block;
+}
+
+.player.run .standing-player,
+.player.stand .running-player {
+    display: none;
+}
+
+.look-up {
+    transform: rotate(0deg);
+}
+
+.look-right {
+    transform: rotate(90deg);
+}
+
+.look-down {
+    transform: rotate(180deg);
+}
+
+.look-left {
+    transform: rotate(270deg);
+}
+
+.power_ups {
+    position: relative;
+}
+
+.power_up {
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    width: 25px;
+    height: 25px;
+    z-index: 1;
+    display:none;
+}
+
+.power_up.boost {
+    top: 499px;
+    left: 42px;
+}
+
+.power_up.key {
+    top: 44px;
+    left: 981px;
+}
+
+.power_up img {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    z-index: 2;
+}
+
+.power_up:before {
+    content: '';
+    position: relative;
+    display: block;
+    width: 300%;
+    height: 300%;
+    box-sizing: border-box;
+    margin-left: -100%;
+    margin-top: -100%;
+    border-radius: 45px;
+    background-color: #efa9a9;
+    animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.power_up:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 8px rgba(0,0,0,.3);
+    animation: pulse-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -.4s infinite;
+}
+
+.power_up.key:after {
+    background-color: #f4da0678;
+    border-radius: 0;
+}
+
+.power_up.boost:after {
+    background-color: lawngreen;
+    border-radius: 5px;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(.33);
+    }
+    80%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes pulse-dot {
+    0% {
+        transform: scale(.8);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(.8);
+    }
+}
+
+
+.hud {
+    z-index: 2;
+    top: 633px;
+    left: 25px;
+    background-color: #261a1a;
+    opacity: 0.5;
+    color: white;
+    padding: 0 22px 11px 20px;
+    width: 100px;
+    border: 2px solid #C2894E;
+    border-left-width: 0;
+    border-bottom-width: 0;
+    font-family: "Courier New";
+}
+
+.hud h4 {
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    margin-top: 12px;
+}
+
+.hud p {
+    margin: 2px 0;
+}
+
+.show {
+    display:block;
+}
+
+.hide {
+    display: none;
+}

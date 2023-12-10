@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>YouKnow Out?</title>
+	<link rel="stylesheet" href="assets/css/styles_alt.css">
+</head>
+<body>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script>
+    var spawn_left = 36;
+    var spawn_top = 25;
+    var player_left = 0;
+    var player_top = 0;
+    var button_left = false;
+    var button_right = false;
+    var button_up = false;
+    var button_down = false;
+    var speed_mod = 1;
+    var speed_base = 2.5;
+	var toggle_hud = true;
+    var has_key = false;
+	var is_running = false;
+	var chest_open = false;
+	var video_player = document.getElementsByClassName('.running-player');
+	var collect_sound = new Audio('assets/sounds/multimedia_button_click.mp3');
+	var game_sound = new Audio('assets/sounds/Loop 2.mp3');
+	$(document).ready(function () {
+		document.getElementById('startbutton').onclick = function() {
+			$('.game-start').addClass("hide");
+			$(".game-container").removeClass("hide");
+			game_sound.play();
+			game_sound.loop = true;
+		};
+        setPlayerSpawn();
+        $(document).keydown(function (event) {
+            if (event.which == 37) {
+                button_left = true;
+            }
+            if (event.which == 38) {
+                button_up = true;
+            }
+            if (event.which == 39) {
+                button_right = true;
+            }
+            if (event.which == 40) {
+                button_down = true;
+            }
+			is_running = true;
+        });
+        $(document).keyup(function (event) {
+            if (event.which == 37) {
+                button_left = false;
+            }
+            if (event.which == 38) {
+                button_up = false;
+            }
+            if (event.which == 39) {
+                button_right = false;
+            }
+            if (event.which == 40) {
+                button_down = false;
+            }
+			is_running = false;
+		});
+        $(document).keypress(function (event)
+		{
+			if (event.which == 116)
+            {
+				if (toggle_hud == true)
+                {
+                    $(".hud").hide();
+                    toggle_hud = false;
+				}
+                else
+                {
+                    $(".hud").show();
+                    toggle_hud = true;
+				}
+			}
+        });
+        startGameLoop();
+    });
+
+    function startGameLoop() {
+        setInterval(function () {
+            checkPlayerMovement();
+            drawHud();
+        }, (1000 / 30));
+    }
+
+    function checkPlayerMovement() {
+        var distance = speed_base * speed_mod;
+        var future_left = player_left;
+		var future_top = player_top;
+		switchPlayer();
+        if (button_left) {
+            future_left = player_left - distance;
+            future_top = player_top;
+			removeDirection();
+			$('.player').addClass("look-left");
+        }
+        if (button_up) {
+            future_left = player_left;
+            future_top = player_top - distance;
+			removeDirection();
+			$('.player').addClass("look-up");
+        }
+        if (button_right) {
+            future_left = player_left + distance;
+            future_top = player_top;
+			removeDirection();
+			$('.player').addClass("look-right");
+        }
+        if (button_down) {
+            future_left = player_left;
+            future_top = player_top + distance;
+			removeDirection();
+			$('.player').addClass("look-down");
+
+		}
+        if (button_left || button_up || button_down || button_right){
+            var move_is_valid = true;
+            $ (".wall").each(function( index ) {
+                var wall_top = $(this).css("top");
+                var wall_left = $(this).css("left");
+                var wall_width = $(this).css("width");
+                var wall_height = $(this).css("height");
+
+            });
+            if (move_is_valid) {
+                if ((future_left <= 23) || (future_left >= 969) || (future_top <= 24) || (future_top >= 712)) {
+                    move_is_valid = false;
+                } else if ((future_left >= 420)&&(future_left <= 469)&&(future_top >= 0)&&(future_top <= 198)) {
+                    move_is_valid = false;
+                }
+                 else if ((future_left >= 670)&&(future_left <= 1000)&&(future_top >= 420)&&(future_top <= 468)) {
+				 	move_is_valid = false;
+				}
+                 else if ((future_left >= 0)&&(future_left <= 148)&&(future_top >= 105)&&(future_top <= 153)) {
+                     move_is_valid = false;
+                }
+                 else if ((future_left >= 0)&&(future_left <= 398)&&(future_top >= 430)&&(future_top <= 480)) {
+                     move_is_valid = false;
+				}
+                 else if ((future_left >= 270)&&(future_left <= 318)&&(future_top >= 460)&&(future_top <= 600)) {
+                     move_is_valid = false;
+				}
+                 else if ((future_left >= 670)&&(future_left <= 718)&&(future_top >= 70)&&(future_top <= 370)) {
+                     move_is_valid = false;
+				}
+                 else if ((future_left >= 490)&&(future_left <= 538)&&(future_top >= 270)&&(future_top <= 650)) {
+                     move_is_valid = false;
+				}
+                 else if ((future_left >= 120)&&(future_left <= 348)&&(future_top >= 260)&&(future_top <= 310)) {
+                     move_is_valid = false;
+				}
+               else {
+				   setPlayerPosition(future_left, future_top);
+			   }
+            }
+			if (speed_mod) {
+				if ((future_left >= 24)&&(future_left <= 58)&&(future_top >= 481)&&(future_top <= 514)) {
+                    speed_mod = 1.5;
+                    $(".power_up.boost").removeClass("show");
+					if (!chest_open) {
+						collect_sound.play();
+					}
+					chest_open = true;
+                    $(".chest-2").addClass("chest-open");
+                }
+                else if ((future_left >= 951)&&(future_left <= 996)&&(future_top >= 25)&&(future_top <= 59)) {
+                    $(".power_up.key").removeClass("show");
+                    $(".chest-1").addClass("chest-open");
+                    has_key = true;
+                    console.log("schlüssel aufgehoben");
+				}
+                else if ((future_left >= 960)&&(future_left <= 1024)&&(future_top >= 696)&&(future_top <= 756)&&(has_key == true)) {
+                    $(".door-exit").removeClass("locked");
+					console.log("tür mit schlüssel geöffnet");
+					game_sound.pause();
+				}
+            }
+		}
+
+    }
+
+	function switchPlayer() {
+		if (is_running) {
+			$('.player').removeClass("stand");
+			$('.player').addClass("run");
+			$('video').prop('muted', false);
+		}
+		else {
+			$('.player').removeClass("run");
+			$('.player').addClass("stand");
+			$('video').prop('muted', true);
+		}
+	}
+
+	function removeDirection() {
+		$('.player').removeClass (function (index, className) {
+			return (className.match (/\look-\S+/g) || []).join(' ');
+		});
+	}
+
+    function setPlayerSpawn() {
+        setPlayerPosition(spawn_left, spawn_top);
+    }
+
+    function setPlayerPosition(left, top) {
+        $("#player").css("top", top + "px");
+        $("#player").css("left", left + "px");
+        player_left = left;
+        player_top = top;
+    }
+
+    function drawHud() {
+      $("#hud_left").empty().append("left:"+player_left);
+      $("#hud_top").empty().append("top:"+player_top);
+      $("#hud_speed").empty().append("speed:"+speed_mod);
+      $("#hud_key").empty().append("speed:"+has_key);
+
+	}
+
+</script>
+<div class="game-start">
+	<button id="startbutton">Play</button>
+</div>
+<div class="game-container hide">
+	<div class="boxes">
+		<div class="box box-1"></div>
+		<div class="box box-2"></div>
+		<div class="box box-3"></div>
+	</div>
+	<div class="tables">
+		<div class="table table-1"></div>
+		<div class="table table-2"></div>
+	</div>
+	<div class="chests">
+		<div class="chest chest-1"></div>
+		<div class="chest chest-2"></div>
+	</div>
+	<div class="doors">
+		<div class="door door-exit locked"></div>
+		<div class="door door-entrance"></div>
+	</div>
+	<div class="walls">
+		<div class="wall wall-south"></div>
+		<div class="wall wall-west"></div>
+		<div class="wall wall-east"></div>
+		<div class="wall wall-north"></div>
+		<div class="wall wall-1"></div>
+		<div class="wall wall-2"></div>
+		<div class="wall wall-3"></div>
+		<div class="wall wall-4"></div>
+		<div class="wall wall-5"></div>
+		<div class="wall wall-6"></div>
+		<div class="wall wall-7"></div>
+		<div class="wall wall-8"></div>
+	</div>
+	<div class="player-container">
+		<div class="player look-right stand" id="player">
+			<img src="assets/img/figure/player3.gif" class="hide running-player">
+			<img src="assets/img/figure/player.png" class="standing-player">
+			<!--<video width="32" height="32" class="running-player" autoplay loop muted >
+				<source src="playeraudio.mp4">
+			</video>-->
+
+		</div>
+
+	</div>
+	<div>
+		<div class="hud">
+			<h4>Info:</h4>
+			<p id="hud_left"> left:  </p>
+			<p id="hud_top"> top:  </p>
+			<p id="hud_speed"> speed:  </p>
+		</div>
+	</div>
+	<div>
+		<div class="power_ups">
+			<div class="power_up key show">
+				<img src="assets/img/textures/key.png">
+			</div>
+			<div class="power_up boost show">
+				<img src="assets/img/textures/potion.png">
+			</div>
+
+		</div>
+	</div>
+</div>
+</body>
+</html>
